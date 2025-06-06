@@ -7,7 +7,7 @@ parser code {:
 :}
 
 scan with {: return s.next_token(); :};
-// terminal INT_CONST, FLOAT_CONST, ID;
+terminal ID;
 terminal PLUS, MINUS, TIMES, DIV, EQ, NEQ;
 terminal IF, ELSE, WHILE, RETURN;
 terminal SEMI, UMINUS, COMMA, LBRACE, RBRACE, LPAREN, RPAREN;

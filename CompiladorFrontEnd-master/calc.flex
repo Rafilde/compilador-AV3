@@ -10,8 +10,10 @@ WHITESPACE = [ \t\n\r]+
 SINGLE_LINE_COMMENT = "//"[^\n]*
 // criar um para ignorar mais de uma linha
 DIGIT = [0-9]
-INT         = {DIGIT}+
-FLOAT       = {DIGIT}+"."{DIGIT}+
+LETTER = [a-zA-Z_]
+INT = {DIGIT}+
+FLOAT = {DIGIT}+"."{DIGIT}+
+ID = {LETTER}({LETTER}|{DIGIT})*
 
 %%
 
@@ -46,39 +48,9 @@ FLOAT       = {DIGIT}+"."{DIGIT}+
     {FLOAT}         { return new Symbol(sym.FLOAT, Double.parseDouble(yytext())); }
     {INT}           { return new Symbol(sym.INT, Integer.parseInt(yytext())); }
 
+    // Identificadores
+    {ID}                 { return new Symbol(sym.ID, yytext()); }
+
+    // Caractere inválido
     .             { System.err.println("Illegal character: " + yytext()); }
 }
-
-
-// import java_cup.runtime.*;
-
-// %%
-
-// %class scanner
-// %unicode
-// %cup
-
-// WHITESPACE = [ \t\n\r]+
-// SINGLE_LINE_COMMENT = "//"[^\n]*
-// DIGIT             = [0-9]
-// LETTER            = [a-zA-Z]
-// ID                = {LETTER}({LETTER}|{DIGIT})*
-// INT_CONST         = {DIGIT}+
-// FLOAT_CONST       = {DIGIT}+"."{DIGIT}+
-
-// %%
-
-// <YYINITIAL> {
-//     // Ignorar espaços e comentários
-//     {WHITESPACE}  { /**/ }
-//     {SINGLE_LINE_COMMENT} { /**/ } // Ignore single-line comments
-
-//     // Identificadores
-//     {ID}                 { return new Symbol(sym.ID, yytext()); }
-
-//     // Constantes
-//     {FLOAT_CONST}        { return new Symbol(sym.FLOAT_CONST, Double.parseDouble(yytext())); }
-//     {INT_CONST}          { return new Symbol(sym.INT_CONST, Integer.parseInt(yytext())); }
-
-
-// }
