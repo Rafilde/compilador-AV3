@@ -5,6 +5,8 @@ import java_cup.runtime.*;
 %class scanner
 %unicode
 %cup
+%line
+%column
 
 WHITESPACE = [ \t\n\r]+
 SINGLE_LINE_COMMENT = "//"[^\n]*
