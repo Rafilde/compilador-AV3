@@ -7,12 +7,15 @@ parser code {:
 :}
 
 scan with {: return s.next_token(); :};
-
-terminal            SEMI, PLUS, MINUS, TIMES, UMINUS, LPAREN, RPAREN;
-terminal Integer    NUMBER;
+// terminal INT_CONST, FLOAT_CONST, ID;
+terminal PLUS, MINUS, TIMES, DIV, EQ, NEQ;
+terminal IF, ELSE, WHILE, RETURN;
+terminal SEMI, UMINUS, COMMA, LBRACE, RBRACE, LPAREN, RPAREN;
+terminal Integer INT;
+terminal Double FLOAT;
 
 non terminal            expr_list;
-non terminal Integer    expr;
+non terminal Double    expr;
 
 precedence left PLUS, MINUS;
 precedence left TIMES;
@@ -27,5 +30,6 @@ expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;       :}
              | MINUS expr:e                 {: RESULT = -e;          :}
   	     %prec UMINUS
        | LPAREN expr:e RPAREN	         {: RESULT = e;           :}
-       | NUMBER:n	                     {: RESULT = n;           :}
+       | INT:n                        {: RESULT = (double) n;   :}
+       | FLOAT:n                      {: RESULT = n;            :}
              ;
