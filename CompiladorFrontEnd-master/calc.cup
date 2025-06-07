@@ -4,6 +4,16 @@ import java.io.*;
 parser code {:
     scanner s;
     parser(scanner s){ this.s=s; }
+
+    private Double toNumber(Object value) {
+        if (value instanceof Integer) {
+            return ((Integer) value).doubleValue();
+        } else if (value instanceof Double) {
+            return (Double) value;
+        } else {
+            throw new IllegalArgumentException("Cannot convert to Double: " + value);
+        }
+    }
 :}
 
 scan with {: return s.next_token(); :};
@@ -11,7 +21,6 @@ terminal ID;
 terminal PLUS, MINUS, TIMES, DIV, MOD;
 terminal EQ, NEQ, GT, LT, GTE, LTE;
 terminal IF, ELSE, WHILE, RETURN, ESCREVA, FUNCAO;
-terminal INICIO, FIM;
 terminal ASSIGN;
 terminal SEMI, UMINUS, COMMA, LBRACE, RBRACE, LPAREN, RPAREN;
 terminal Integer INT;
@@ -20,8 +29,9 @@ terminal Boolean BOOLEANO;
 terminal AND, OR, NOT;
 
 non terminal            expr_list;
-non terminal Double    expr;
+non terminal Object    expr;
 
+precedence left GT, LT, GTE, LTE, EQ, NEQ;
 precedence left PLUS, MINUS;
 precedence left TIMES, DIV, MOD;
 precedence left UMINUS;
@@ -30,13 +40,19 @@ expr_list ::= expr_list expr:e SEMI         {: System.out.println(e);:}
             | expr:e SEMI                   {: System.out.println(e);:}
 ;
 
-expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1 + e2;     :}
-             | expr:e1 MINUS expr:e2        {: RESULT = e1 - e2;     :}
-             | expr:e1 TIMES expr:e2        {: RESULT = e1 * e2;     :}
-             | expr:e1 DIV expr:e2          {: RESULT = e1 / e2;     :}
-             | expr:e1 MOD expr:e2          {: RESULT = e1 % e2;     :}
-             | MINUS expr:e                 {: RESULT = -e;          :}
+expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = toNumber(e1) + toNumber(e2); :}
+             | expr:e1 MINUS expr:e2        {: RESULT = toNumber(e1) - toNumber(e2); :}
+             | expr:e1 TIMES expr:e2        {: RESULT = toNumber(e1) * toNumber(e2); :}
+             | expr:e1 DIV expr:e2          {: RESULT = toNumber(e1) / toNumber(e2); :}
+             | expr:e1 MOD expr:e2          {: RESULT = toNumber(e1) % toNumber(e2); :}
+             | MINUS expr:e                 {: RESULT = -toNumber(e);                :}
                %prec UMINUS
+             | expr:e1 GT expr:e2           {: RESULT = toNumber(e1) > toNumber(e2); :}
+             | expr:e1 LT expr:e2           {: RESULT = toNumber(e1) < toNumber(e2); :}
+             | expr:e1 GTE expr:e2          {: RESULT = toNumber(e1) >= toNumber(e2); :}
+             | expr:e1 LTE expr:e2          {: RESULT = toNumber(e1) <= toNumber(e2); :}
+             | expr:e1 EQ expr:e2           {: RESULT = toNumber(e1).equals(toNumber(e2)); :}
+             | expr:e1 NEQ expr:e2          {: RESULT = !toNumber(e1).equals(toNumber(e2)); :}
              | LPAREN expr:e RPAREN         {: RESULT = e;           :}
              | INT:n                        {: RESULT = (double) n;  :}
              | FLOAT:n                      {: RESULT = n;           :}

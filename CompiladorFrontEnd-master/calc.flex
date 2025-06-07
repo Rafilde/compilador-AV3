@@ -25,8 +25,6 @@ ID = {LETTER}({LETTER}|{DIGIT})*
     {SINGLE_LINE_COMMENT} { /**/ } 
 
     // Palavras-chave
-    "inicio"              { return new Symbol(sym.INICIO); }
-    "fim"                 { return new Symbol(sym.FIM); }
     "se"                  { return new Symbol(sym.IF); }
     "senão"               { return new Symbol(sym.ELSE); }
     "enquanto"            { return new Symbol(sym.WHILE); }
