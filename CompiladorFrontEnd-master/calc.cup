@@ -8,28 +8,36 @@ parser code {:
 
 scan with {: return s.next_token(); :};
 terminal ID;
-terminal PLUS, MINUS, TIMES, DIV, EQ, NEQ;
-terminal IF, ELSE, WHILE, RETURN;
+terminal PLUS, MINUS, TIMES, DIV, MOD;
+terminal EQ, NEQ, GT, LT, GTE, LTE;
+terminal IF, ELSE, WHILE, RETURN, ESCREVA, FUNCAO;
+terminal INICIO, FIM;
+terminal ASSIGN;
 terminal SEMI, UMINUS, COMMA, LBRACE, RBRACE, LPAREN, RPAREN;
 terminal Integer INT;
 terminal Double FLOAT;
+terminal Boolean BOOLEANO;
+terminal AND, OR, NOT;
 
 non terminal            expr_list;
 non terminal Double    expr;
 
 precedence left PLUS, MINUS;
-precedence left TIMES;
+precedence left TIMES, DIV, MOD;
 precedence left UMINUS;
 
 expr_list ::= expr_list expr:e SEMI         {: System.out.println(e);:}
             | expr:e SEMI                   {: System.out.println(e);:}
 ;
-expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;       :}
-             | expr:e1 MINUS expr:e2        {: RESULT = e1-e2;       :}
-             | expr:e1 TIMES expr:e2        {: RESULT = e1*e2;       :}
+
+expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1 + e2;     :}
+             | expr:e1 MINUS expr:e2        {: RESULT = e1 - e2;     :}
+             | expr:e1 TIMES expr:e2        {: RESULT = e1 * e2;     :}
+             | expr:e1 DIV expr:e2          {: RESULT = e1 / e2;     :}
+             | expr:e1 MOD expr:e2          {: RESULT = e1 % e2;     :}
              | MINUS expr:e                 {: RESULT = -e;          :}
-  	     %prec UMINUS
-       | LPAREN expr:e RPAREN	         {: RESULT = e;           :}
-       | INT:n                        {: RESULT = (double) n;   :}
-       | FLOAT:n                      {: RESULT = n;            :}
+               %prec UMINUS
+             | LPAREN expr:e RPAREN         {: RESULT = e;           :}
+             | INT:n                        {: RESULT = (double) n;  :}
+             | FLOAT:n                      {: RESULT = n;           :}
              ;

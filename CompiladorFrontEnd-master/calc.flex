@@ -25,18 +25,37 @@ ID = {LETTER}({LETTER}|{DIGIT})*
     {SINGLE_LINE_COMMENT} { /**/ } 
 
     // Palavras-chave
-    "if"                 { return new Symbol(sym.IF); }
-    "else"               { return new Symbol(sym.ELSE); }
-    "while"              { return new Symbol(sym.WHILE); }
-    "return"             { return new Symbol(sym.RETURN); }
+    "inicio"              { return new Symbol(sym.INICIO); }
+    "fim"                 { return new Symbol(sym.FIM); }
+    "se"                  { return new Symbol(sym.IF); }
+    "senão"               { return new Symbol(sym.ELSE); }
+    "enquanto"            { return new Symbol(sym.WHILE); }
+    "funcao"              { return new Symbol(sym.FUNCAO); }
+    "retorne"             { return new Symbol(sym.RETURN); }
+    "escreva"             { return new Symbol(sym.ESCREVA); }
+    
+    // Operadores relacionais 
+    "igual"               { return new Symbol(sym.EQ); }     
+    "diferente"           { return new Symbol(sym.NEQ); }     
+    "maior"               { return new Symbol(sym.GT); }      
+    "menor"               { return new Symbol(sym.LT); }      
+    "maior igual"      { return new Symbol(sym.GTE); }    
+    "menor igual"      { return new Symbol(sym.LTE); }    
 
-    // Operadores
-    "=="                 { return new Symbol(sym.EQ); }
-    "!="                 { return new Symbol(sym.NEQ); }
-    "+"                  { return new Symbol(sym.PLUS); }
-    "-"                  { return new Symbol(sym.MINUS); }
-    "*"                  { return new Symbol(sym.TIMES); }
-    "/"                  { return new Symbol(sym.DIV); }
+    // Operadores aritméticos (pseudocódigo)
+    "mais"                { return new Symbol(sym.PLUS); }   
+    "menos"               { return new Symbol(sym.MINUS); }  
+    "vezes"               { return new Symbol(sym.TIMES); }   
+    "divide"            { return new Symbol(sym.DIV); }    
+    "resto"                 { return new Symbol(sym.MOD); }
+
+    // Operador de atribuição
+    "recebe"              { return new Symbol(sym.ASSIGN); } 
+
+    // Operadores lógicos
+    "e"                   { return new Symbol(sym.AND); }    
+    "ou"                  { return new Symbol(sym.OR); }      
+    "nao"                 { return new Symbol(sym.NOT); }     
 
     // Delimitadores
     ";"                  { return new Symbol(sym.SEMI); }
@@ -49,6 +68,8 @@ ID = {LETTER}({LETTER}|{DIGIT})*
     // Valores
     {FLOAT}         { return new Symbol(sym.FLOAT, Double.parseDouble(yytext())); }
     {INT}           { return new Symbol(sym.INT, Integer.parseInt(yytext())); }
+    "verdadeiro"          { return new Symbol(sym.BOOLEANO, Boolean.TRUE); } 
+    "falso"               { return new Symbol(sym.BOOLEANO, Boolean.FALSE); }
 
     // Identificadores
     {ID}                 { return new Symbol(sym.ID, yytext()); }

@@ -4,28 +4,21 @@ import java_cup.runtime.*;
 public class Main {
     public static void main(String[] args) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("input.txt"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             scanner scanner = new scanner(reader);
+            parser parser = new parser(scanner);
 
-            System.out.println("========================================");
-            System.out.println("| Token Name      | Token Value        |");
-            System.out.println("========================================");
+            System.out.println("Enter expressions (end with semicolon ';'):");
 
-            Symbol token;
-            while ((token = scanner.next_token()).sym != sym.EOF) {
-                String tokenName = sym.terminalNames[token.sym];
-                Object value = token.value;
+            while (true) {
+                System.out.print("> ");
+                String input = reader.readLine();
+                if (input == null || input.equalsIgnoreCase("exit")) break;
 
-                if (value != null) {
-                    System.out.printf("| %-15s | %-18s |\n", tokenName, value);
-                } else {
-                    System.out.printf("| %-15s | %-18s |\n", tokenName, "N/A");
-                }
+                // Feed input to the scanner
+                scanner.yyreset(new StringReader(input));
+                parser.parse();
             }
-
-            System.out.println("========================================");
-
-            reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
