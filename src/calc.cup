@@ -1,9 +1,12 @@
 import java_cup.runtime.*;
 import java.io.*;
+import java.util.HashMap;
 
 parser code {:
     scanner s;
     parser(scanner s){ this.s=s; }
+
+    private HashMap<String, Object> var = new HashMap<>();
 
     private Double toNumber(Object value) {
         if (value instanceof Integer) {
@@ -28,7 +31,7 @@ scan with {: return s.next_token(); :};
 terminal ID;
 terminal PLUS, MINUS, TIMES, DIV, MOD;
 terminal EQ, NEQ, GT, LT, GTE, LTE;
-terminal IF, ELSE, WHILE, RETURN, ESCREVA, FUNCAO;
+terminal IF, ELSE, ESCREVA;
 terminal ASSIGN;
 terminal SEMI, UMINUS, COMMA, LBRACE, RBRACE, LPAREN, RPAREN;
 terminal Integer INT;
@@ -51,7 +54,17 @@ expr_list ::= expr_list ESCREVA expr:e SEMI {: System.out.println(e); :}
             | expr:e SEMI                   {: System.out.println("Running fiddle"); /* Vai fazer a expressão só não vai imprimir  */ :}
 ;
 
-expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = toNumber(e1) + toNumber(e2); :}
+expr ::= ID:id ASSIGN expr:e {: 
+            var.put((String) id, e); 
+            RESULT = e; 
+         :}
+       | ID:id {: 
+            RESULT = var.get((String) id); 
+            if (RESULT == null) {
+                throw new RuntimeException("Variable '" + id + "' not defined.");
+            }
+         :}
+             | expr:e1 PLUS  expr:e2         {: RESULT = toNumber(e1) + toNumber(e2); :}
              | expr:e1 MINUS expr:e2        {: RESULT = toNumber(e1) - toNumber(e2); :}
              | expr:e1 TIMES expr:e2        {: RESULT = toNumber(e1) * toNumber(e2); :}
              | expr:e1 DIV expr:e2          {: RESULT = toNumber(e1) / toNumber(e2); :}

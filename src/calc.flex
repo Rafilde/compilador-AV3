@@ -10,7 +10,6 @@ import java_cup.runtime.*;
 
 WHITESPACE = [ \t\n\r]+
 SINGLE_LINE_COMMENT = "//"[^\n]*
-// criar um para ignorar mais de uma linha
 DIGIT = [0-9]
 LETTER = [a-zA-Z_]
 INT = {DIGIT}+
@@ -27,9 +26,6 @@ ID = {LETTER}({LETTER}|{DIGIT})*
     // Palavras-chave
     "se"                  { return new Symbol(sym.IF); }
     "senão"               { return new Symbol(sym.ELSE); }
-    "enquanto"            { return new Symbol(sym.WHILE); }
-    "funcao"              { return new Symbol(sym.FUNCAO); }
-    "retorne"             { return new Symbol(sym.RETURN); }
     "escreva"             { return new Symbol(sym.ESCREVA); }
     
     // Operadores relacionais 
@@ -48,7 +44,7 @@ ID = {LETTER}({LETTER}|{DIGIT})*
     "resto"                 { return new Symbol(sym.MOD); } //✅
 
     // Operador de atribuição
-    "recebe"              { return new Symbol(sym.ASSIGN); } 
+    "recebe"              { return new Symbol(sym.ASSIGN); } //✅
 
     // Operadores lógicos
     "e"                   { return new Symbol(sym.AND); } //✅    

@@ -1,2 +1,3 @@
-escreva verdadeiro e 2 maior 1;
-2 mais 2;
+x recebe 10; 
+y recebe x mais 5; 
+escreva y;
