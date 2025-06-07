@@ -1,6 +1,2 @@
-inicio
-  escreva 2 mais 3 vezes 4;
-  escreva verdadeiro e falso;
-  x recebe 5 resto 2;
-  escreva x;
-fim
+2 mais 2; 
+2 menor 5;

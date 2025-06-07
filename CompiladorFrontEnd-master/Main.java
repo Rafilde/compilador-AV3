@@ -4,7 +4,7 @@ import java_cup.runtime.*;
 public class Main {
     public static void main(String[] args) {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader reader = new BufferedReader(new FileReader("input.txt"));
             scanner scanner = new scanner(reader);
             parser parser = new parser(scanner);
 
