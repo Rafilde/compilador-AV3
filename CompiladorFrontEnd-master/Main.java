@@ -3,22 +3,27 @@ import java_cup.runtime.*;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("input.txt"));
+                try {
+            FileReader reader = new FileReader("input.txt");
             scanner scanner = new scanner(reader);
+
+            System.out.println("Tokens encontrados no arquivo:");
+
+            Symbol token;
+            while ((token = scanner.next_token()) != null) {
+                if (token.sym == sym.EOF) break;
+
+                System.out.println("Token: " + token.sym + ", Valor: " + token.value);
+            }
+
+            // Reiniciar o scanner para o parser
+            reader = new FileReader("input.txt");
+            scanner.yyreset(reader);
             parser parser = new parser(scanner);
 
-            System.out.println("Enter expressions (end with semicolon ';'):");
+            System.out.println("\nParsing o código-fonte:");
+            parser.parse();
 
-            while (true) {
-                System.out.print("> ");
-                String input = reader.readLine();
-                if (input == null || input.equalsIgnoreCase("exit")) break;
-
-                // Feed input to the scanner
-                scanner.yyreset(new StringReader(input));
-                parser.parse();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -14,6 +14,14 @@ parser code {:
             throw new IllegalArgumentException("Cannot convert to Double: " + value);
         }
     }
+
+    private Boolean toBoolean(Object value) {
+      if (value instanceof Boolean) {
+          return (Boolean) value;
+      } else {
+          throw new IllegalArgumentException("Cannot convert to Boolean: " + value);
+      }
+    }
 :}
 
 scan with {: return s.next_token(); :};
@@ -31,13 +39,16 @@ terminal AND, OR, NOT;
 non terminal            expr_list;
 non terminal Object    expr;
 
+precedence left OR, AND, NOT;
 precedence left GT, LT, GTE, LTE, EQ, NEQ;
 precedence left PLUS, MINUS;
 precedence left TIMES, DIV, MOD;
 precedence left UMINUS;
 
-expr_list ::= expr_list expr:e SEMI         {: System.out.println(e);:}
-            | expr:e SEMI                   {: System.out.println(e);:}
+expr_list ::= expr_list ESCREVA expr:e SEMI {: System.out.println(e); :}
+            | expr_list expr:e SEMI         {: System.out.println("Running fiddle"); /* Vai fazer a expressão só não vai imprimir */ :}
+            | ESCREVA expr:e SEMI           {: System.out.println(e); :}
+            | expr:e SEMI                   {: System.out.println("Running fiddle"); /* Vai fazer a expressão só não vai imprimir  */ :}
 ;
 
 expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = toNumber(e1) + toNumber(e2); :}
@@ -53,7 +64,11 @@ expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = toNumber(e1) + toNumber(
              | expr:e1 LTE expr:e2          {: RESULT = toNumber(e1) <= toNumber(e2); :}
              | expr:e1 EQ expr:e2           {: RESULT = toNumber(e1).equals(toNumber(e2)); :}
              | expr:e1 NEQ expr:e2          {: RESULT = !toNumber(e1).equals(toNumber(e2)); :}
+             | expr:e1 AND expr:e2          {: RESULT = toBoolean(e1) && toBoolean(e2); :}
+             | expr:e1 OR expr:e2           {: RESULT = toBoolean(e1) || toBoolean(e2); :}
+             | NOT expr:e                   {: RESULT = !toBoolean(e);                :}
              | LPAREN expr:e RPAREN         {: RESULT = e;           :}
              | INT:n                        {: RESULT = (double) n;  :}
              | FLOAT:n                      {: RESULT = n;           :}
+             | BOOLEANO:b                   {: RESULT = b; :}
              ;

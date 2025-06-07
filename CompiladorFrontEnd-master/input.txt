@@ -1,2 +1,2 @@
-2 mais 2; 
-2 menor 5;
+escreva verdadeiro e 2 maior 1;
+2 mais 2;
