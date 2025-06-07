@@ -31,7 +31,7 @@ scan with {: return s.next_token(); :};
 terminal ID;
 terminal PLUS, MINUS, TIMES, DIV, MOD;
 terminal EQ, NEQ, GT, LT, GTE, LTE;
-terminal IF, ELSE, ESCREVA;
+terminal ESCREVA;
 terminal ASSIGN;
 terminal SEMI, UMINUS, COMMA, LBRACE, RBRACE, LPAREN, RPAREN;
 terminal Integer INT;

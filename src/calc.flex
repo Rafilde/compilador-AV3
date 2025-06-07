@@ -24,8 +24,6 @@ ID = {LETTER}({LETTER}|{DIGIT})*
     {SINGLE_LINE_COMMENT} { /**/ } 
 
     // Palavras-chave
-    "se"                  { return new Symbol(sym.IF); }
-    "senão"               { return new Symbol(sym.ELSE); }
     "escreva"             { return new Symbol(sym.ESCREVA); }
     
     // Operadores relacionais 
@@ -62,7 +60,7 @@ ID = {LETTER}({LETTER}|{DIGIT})*
     // Valores
     {FLOAT}         { return new Symbol(sym.FLOAT, Double.parseDouble(yytext())); } //✅
     {INT}           { return new Symbol(sym.INT, Integer.parseInt(yytext())); } //✅
-    "verdadeiro"          { return new Symbol(sym.BOOLEANO, Boolean.TRUE); } //✅ 
+    "verdade"          { return new Symbol(sym.BOOLEANO, Boolean.TRUE); } //✅ 
     "falso"               { return new Symbol(sym.BOOLEANO, Boolean.FALSE); } //✅
 
     // Identificadores
