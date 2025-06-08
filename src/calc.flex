@@ -60,7 +60,7 @@ ID = {LETTER}({LETTER}|{DIGIT})*
     // Valores
     {FLOAT}               { return new Symbol(sym.FLOAT, Double.parseDouble(yytext())); } //✅
     {INT}                 { return new Symbol(sym.INT, Integer.parseInt(yytext())); } //✅
-    "verdade"             { return new Symbol(sym.BOOLEANO, Boolean.TRUE); } //✅ 
+    "verdadeiro"          { return new Symbol(sym.BOOLEANO, Boolean.TRUE); } //✅ 
     "falso"               { return new Symbol(sym.BOOLEANO, Boolean.FALSE); } //✅
 
     // Identificadores
