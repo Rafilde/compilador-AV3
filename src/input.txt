@@ -1,3 +1,10 @@
-x recebe verdadeiro; 
-y recebe x e falso; 
-escreva y;
+x recebe (2 mais 2) vezes 4;         // calculo + logica
+escreva x;                           // print
+y recebe falso;                      // booleano
+escreva y;                           // print
+z recebe y ou verdadeiro;            // operacao booleana
+escreva z;                           // print
+evandro recebe 10;                   // atribuicao 
+rafael recebe 4;                     // atribuicao 
+escreva rafael maior que evandro;    // comparativo
+escreva rafael;                      // print

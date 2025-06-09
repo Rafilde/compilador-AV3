@@ -33,7 +33,7 @@ terminal PLUS, MINUS, TIMES, DIV, MOD;
 terminal EQ, NEQ, GT, LT, GTE, LTE;
 terminal ESCREVA;
 terminal ASSIGN;
-terminal SEMI, UMINUS, COMMA, LBRACE, RBRACE, LPAREN, RPAREN;
+terminal SEMI, UMINUS, LPAREN, RPAREN;
 terminal Integer INT;
 terminal Double FLOAT;
 terminal Boolean BOOLEANO;
