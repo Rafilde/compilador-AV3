@@ -1,14 +1,14 @@
 # 🛠️ Compilador Básico Front-end
 
-Este projeto tem como objetivo a construção de um **Analisador Sintático e Semântico** para processar código-fonte escrito em pseudocódigo. O foco está na validação da estrutura e significado do código.
+Este projeto tem como objetivo a construção de um **Analisador Léxico e Sintático** para processar código-fonte escrito em pseudocódigo. O foco está na validação da estrutura e significado do código.
 
 ---
 
 ## 📌 Etapas do Projeto
 
-### 🔹 Etapa 1 – Analisador Sintático
+### 🔹 Etapa 1 – Analisador Léxico
 
-Nesta etapa, foi desenvolvido um **Parser Sintático** que valida a estrutura do código-fonte com base em uma gramática definida. A gramática cobre:
+Nesta etapa, foi desenvolvido um **Parser Léxico** que valida a estrutura do código-fonte com base em uma gramática definida. A gramática cobre:
 
 - **Expressões aritméticas**: `mais`, `menos`, `vezes`, `divide`, `resto`
 - **Operadores relacionais**: `igual`, `diferente`, `maior`, `menor`, `maior igual`, `menor igual`
@@ -18,9 +18,9 @@ Nesta etapa, foi desenvolvido um **Parser Sintático** que valida a estrutura do
 
 ---
 
-### 🔹 Etapa 2 – Analisador Semântico
+### 🔹 Etapa 2 – Analisador Sintático
 
-O **Analisador Semântico** verifica o significado do código, garantindo que:
+O **Analisador Sintático** verifica o significado do código, garantindo que:
 
 - **Tipos de dados** sejam compatíveis em operações e atribuições.
 - **Variáveis** sejam declaradas antes de serem usadas.
