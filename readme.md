@@ -14,7 +14,7 @@ Nesta etapa, foi desenvolvido um **Parser Sintático** que valida a estrutura do
 - **Operadores relacionais**: `igual`, `diferente`, `maior`, `menor`, `maior igual`, `menor igual`
 - **Operadores lógicos**: `e`, `ou`, `nao`
 - **Atribuições**: `recebe`
-- **Delimitadores**: `{`, `}`, `(`, `)`, `;`
+- **Delimitadores**: `(`, `)`, `;`
 
 ---
 
@@ -55,7 +55,7 @@ O **Analisador Semântico** verifica o significado do código, garantindo que:
 
 ### Outros:
 - **`recebe`**: Realiza atribuição de valores a variáveis.
-- **Delimitadores**: `{`, `}`, `(`, `)`, `;` são usados para estruturar o código.
+- **Delimitadores**: `(`, `)`, `;` são usados para estruturar o código.
 
 ---
 

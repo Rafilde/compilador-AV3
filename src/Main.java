@@ -8,7 +8,7 @@ public class Main {
             scanner scanner = new scanner(reader);
             parser parser = new parser(scanner);
 
-            System.out.println("Enter expressions (end with semicolon ';'):");
+            System.out.println("As expressoes devem terminar com ';':");
 
             while (true) {
                 System.out.print("> ");
